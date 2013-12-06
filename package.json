@@ -1,0 +1,21 @@
+{
+  "version": "0.4.0",
+  "bin": {
+    "voc": "./voc.njs"
+  },
+  "name": "voc",
+  "author": "SheetJS",
+  "description": "Generalized Literate Programming Framework",
+  "keywords": ["literate", "programming", "voc", "javascript"],
+  "main": "voc.js",
+  "dependencies": {
+    "marked":"",
+    "mkdirp":""
+  },
+  "devDependencies": {
+    "coffee-script":""
+  },
+  "repository": { "type": "git", "url": "git://github.com/SheetJS/voc.git" },
+  "bugs": { "url": "https://github.com/SheetJS/voc/issues" },
+  "preferGlobal": true
+}
