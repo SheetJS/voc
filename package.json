@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "bin": {
     "voc": "./voc.njs"
   },
@@ -8,10 +8,15 @@
   "description": "Generalized Literate Programming Framework",
   "keywords": ["literate", "programming", "voc", "javascript"],
   "main": "voc.js",
-  "dependencies": {
-    "marked":"",
-    "mkdirp":""
-  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "marked.js",
+    "mkdirp.js",
+    "voc.js",
+    "voc.njs"
+  ],
+  "dependencies": {},
   "devDependencies": {
     "coffee-script":""
   },

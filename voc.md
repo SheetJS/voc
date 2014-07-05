@@ -6,7 +6,7 @@ some love too!  This is my effort to rectify this inequity.
 
 ```json>package.json
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
 ```
 
 ## How to use this
@@ -180,7 +180,7 @@ locations (writing to `'foo/bar'` will fail unless `foo` exists):
 
 ```
   var fs = typeof require === "undefined" ? false : require('fs');
-  var mkdirp = !fs ? false : function(f) { return require('mkdirp').sync(require('path').dirname(f)); };
+  var mkdirp = !fs ? false : function(f) { return require('./mkdirp').sync(require('path').dirname(f)); };
 ```
 
 The default behavior is to "carry" the last language if one is omitted.  As seen
@@ -255,7 +255,7 @@ It will first use [marked](https://npmjs.org/package/marked)'s excellent lexer
 to extract the code blocks:
 
 ```
-    var M = (typeof marked !== "undefined" ? marked : require('marked'));
+    var M = (typeof marked !== "undefined" ? marked : require('./marked'));
     var data = M.lexer(src).filter(function(y) { return y.type === 'code'; });
 ```
 
@@ -311,7 +311,7 @@ The Makefile magic is needed because `marked` doesnt preserve the tab character
 and because I use it frequently enough to justify special handling:
 
 ```
-  add(["make","Makefile"], function(code) { return code.replace(/^        /g,"\t").replace(/\n        /mg,"\n\t"); }); 
+  add(["make","Makefile"], function(code) { return code.replace(/^ {8}/g,"\t").replace(/\n {8}/mg,"\n\t"); }); 
 ```
 
 Standard Footer
@@ -330,10 +330,15 @@ Now for some other required fields to finish the `package.json` file:
   "description": "Generalized Literate Programming Framework",
   "keywords": ["literate", "programming", "voc", "javascript"],
   "main": "voc.js",
-  "dependencies": {
-    "marked":"",
-    "mkdirp":""
-  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "marked.js",
+    "mkdirp.js",
+    "voc.js",
+    "voc.njs"
+  ],
+  "dependencies": {},
   "devDependencies": {
     "coffee-script":""
   },

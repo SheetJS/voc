@@ -7,7 +7,7 @@ var VOC = {};
   };
   var files = {};
   var fs = typeof require === "undefined" ? false : require('fs');
-  var mkdirp = !fs ? false : function(f) { return require('mkdirp').sync(require('path').dirname(f)); };
+  var mkdirp = !fs ? false : function(f) { return require('./mkdirp').sync(require('path').dirname(f)); };
   var lastlang="js";
   var process_code = function(src, lastlang) {
     var offset = lastlang.indexOf(">");
@@ -28,7 +28,7 @@ var VOC = {};
     return handlers[lastlang](src);
   };
   var run = function(src) {
-    var M = (typeof marked !== "undefined" ? marked : require('marked'));
+    var M = (typeof marked !== "undefined" ? marked : require('./marked'));
     var data = M.lexer(src).filter(function(y) { return y.type === 'code'; });
     var t = [], s = [];
     data.forEach(function(x) {
@@ -52,6 +52,6 @@ var VOC = {};
     var CS = (typeof CoffeeScript !== "undefined") ? CoffeeScript : require('coffee-script');
     return CS.compile(code, {bare:true});
   });
-  add(["make","Makefile"], function(code) { return code.replace(/^        /g,"\t").replace(/\n        /mg,"\n\t"); });
+  add(["make","Makefile"], function(code) { return code.replace(/^ {8}/g,"\t").replace(/\n {8}/mg,"\n\t"); });
 })(typeof exports !== "undefined" ? exports : VOC);
 
