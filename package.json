@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "1.0.0",
   "bin": {
     "voc": "./voc.njs"
   },
@@ -8,19 +8,13 @@
   "description": "Generalized Literate Programming Framework",
   "keywords": ["literate", "programming", "voc", "javascript"],
   "main": "voc.js",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "marked.js",
-    "mkdirp.js",
-    "voc.js",
-    "voc.njs"
-  ],
+  "files": [ "LICENSE", "README.md", "marked.js", "mkdirp.js", "voc.js", "voc.njs" ],
   "dependencies": {},
-  "devDependencies": {
-    "coffee-script":""
-  },
+  "devDependencies": {},
   "repository": { "type": "git", "url": "git://github.com/SheetJS/voc.git" },
+  "homepage": "http://sheetjs.com/opensource",
   "bugs": { "url": "https://github.com/SheetJS/voc/issues" },
+  "license": "Apache-2.0",
+  "engines": { "node": ">=0.8" },
   "preferGlobal": true
 }

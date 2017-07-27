@@ -6,7 +6,7 @@ some love too!  This is my effort to rectify this inequity.
 
 ```json>package.json
 {
-  "version": "0.5.0",
+  "version": "1.0.0",
 ```
 
 ## How to use this
@@ -308,7 +308,7 @@ Add the `js` and `coffee` standard languages:
 ```
 
 The Makefile magic is needed because `marked` doesnt preserve the tab character
-and because I use it frequently enough to justify special handling:
+and because it is used frequently enough to justify special handling:
 
 ```
   add(["make","Makefile"], function(code) { return code.replace(/^ {8}/g,"\t").replace(/\n {8}/mg,"\n\t"); }); 
@@ -330,25 +330,19 @@ Now for some other required fields to finish the `package.json` file:
   "description": "Generalized Literate Programming Framework",
   "keywords": ["literate", "programming", "voc", "javascript"],
   "main": "voc.js",
-  "files": [
-    "LICENSE",
-    "README.md",
-    "marked.js",
-    "mkdirp.js",
-    "voc.js",
-    "voc.njs"
-  ],
+  "files": [ "LICENSE", "README.md", "marked.js", "mkdirp.js", "voc.js", "voc.njs" ],
   "dependencies": {},
-  "devDependencies": {
-    "coffee-script":""
-  },
+  "devDependencies": {},
   "repository": { "type": "git", "url": "git://github.com/SheetJS/voc.git" },
+  "homepage": "http://sheetjs.com/opensource",
   "bugs": { "url": "https://github.com/SheetJS/voc/issues" },
+  "license": "Apache-2.0",
+  "engines": { "node": ">=0.8" },
   "preferGlobal": true
 }
 ```
 
-And of course, how could I forget the venerable Makefile:
+And of course, how could we forget the venerable Makefile:
 
 ```make>Makefile
 LIBRARY=voc
