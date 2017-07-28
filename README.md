@@ -49,4 +49,9 @@ See the enclosed [voc.md](voc.md) for more information.
 [![NPM Downloads](https://img.shields.io/npm/dt/voc.svg)](https://npmjs.org/package/voc)
 [![ghit.me](https://ghit.me/badge.svg?repo=sheetjs/js-xlsx)](https://ghit.me/repo/sheetjs/js-xlsx)
 [![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/voc?pixel)](https://github.com/SheetJS/voc)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Fvoc.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Fvoc?ref=badge_shield)
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Fvoc.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2FSheetJS%2Fvoc?ref=badge_large)
