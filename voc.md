@@ -6,12 +6,12 @@ some love too!  This is my effort to rectify this inequity.
 
 ```json>package.json
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
 ```
 
 ## How to use this
 
-To use in-browser, include the marked source (and optionally the coffee-script 
+To use in-browser, include the marked source (and optionally the coffee-script
 source if needed):
 
 ```html>
@@ -19,7 +19,7 @@ source if needed):
 <script src="http://coffeescript.org/extras/coffee-script.js"></script>
 ```
 
-This exposes a VOC object.  See the complete example in `scriptify.js.md`. 
+This exposes a VOC object.  See the complete example in `scriptify.js.md`.
 
 
 On the command line `voc.njs` will install as `voc` if done globally:
@@ -34,6 +34,8 @@ On the command line `voc.njs` will install as `voc` if done globally:
 
 ```js>voc.njs
 #!/usr/bin/env node
+/* voc.js (C) 2012-present SheetJS -- http://sheetjs.com */
+/* eslint-env node */
 
 var myfile = process.argv[2]; if(!myfile || myfile ==='-') myfile='/dev/stdin';
 var data = require('fs').readFileSync(myfile,'utf8');
@@ -60,12 +62,12 @@ If a `post` key is specified, run the command:
 ```
   if(vocrc.post) {
     var exec = require('child_process').exec;
-    var make = exec(vocrc.post);
+    exec(vocrc.post);
   }
 }
 ```
 
-If `.vocrc` is missing, just run and print the main output to stdout: 
+If `.vocrc` is missing, just run and print the main output to stdout:
 
 ```
 else console.log(d);
@@ -73,15 +75,15 @@ else console.log(d);
 
 ## Additional Features
 
-If language includes a redirect `>`, the command-line utility will attempt to 
+If language includes a redirect `>`, the command-line utility will attempt to
 redirect the contents to the file named after the `>` -- no spaces allowed.  The
 browser version will silently ignore them.  _By omitting a filename, the block
 will be hidden._
 
 In redirects, the file will be compiled incrementally if the file extension is
-`.js` but will be preserved if the extension is not `.js`.  
+`.js` but will be preserved if the extension is not `.js`.
 
-If no language is specified, the last file behavior is inherited.  
+If no language is specified, the last file behavior is inherited.
 
 The following code block will be emitted as coffeescript
 
@@ -111,7 +113,7 @@ the file as raw:
 console.log "this", "will", "fail"
 ```
 
-And for good measure, to be sure we don't accidentally commit those files, the 
+And for good measure, to be sure we don't accidentally commit those files, the
 `.gitignore` file can be refreshed:
 
 ```>.gitignore
@@ -146,11 +148,13 @@ diff <(voc voc.md) voc.js
 Header comes first:
 
 ```js
+/* voc.js (C) 2012-present  SheetJS -- http://sheetjs.com */
+/*global exports, require:false, marked:false, CoffeeScript:false */
 var VOC = {};
 (function(exports){
 ```
 
-`handlers` will store all of the handlers: 
+`handlers` will store all of the handlers:
 
 ```
   var handlers = {};
@@ -161,14 +165,14 @@ described above.
 
 ```
   var add = function(lang, handler) {
-    if(typeof lang === "string") handlers[lang] = handler; 
+    if(typeof lang === "string") handlers[lang] = handler;
     else lang.forEach(function(l) { handlers[l] = handler; });
   };
 ```
 
 `files` will keep track of all of the files that have been touched.  Because a
 file may be referenced in multiple discontiguous blocks, and since the file is
-written as the process continues, the first action must be a write and the 
+written as the process continues, the first action must be a write and the
 others must be appends.
 
 ```
@@ -185,9 +189,9 @@ locations (writing to `'foo/bar'` will fail unless `foo` exists):
 
 The default behavior is to "carry" the last language if one is omitted.  As seen
 above, the `js` language tag was not applied to the last few code blocks, so the
-engine automatically assumes they are the same as the last known language (in 
+engine automatically assumes they are the same as the last known language (in
 this case, the `js` from the header block).  The blocks are concatenated until a
-block in a different language is found, and only then will it send the entire 
+block in a different language is found, and only then will it send the entire
 mess through the handler.
 
 ```
@@ -276,7 +280,7 @@ it onto the list of code blocks in the current language:
           if(c) t.push(c);
           s = [];
         }
-        lastlang = x.lang; 
+        lastlang = x.lang;
       } else x.lang = lastlang;
       s.push(x.text);
     });
@@ -311,7 +315,7 @@ The Makefile magic is needed because `marked` doesnt preserve the tab character
 and because it is used frequently enough to justify special handling:
 
 ```
-  add(["make","Makefile"], function(code) { return code.replace(/^ {8}/g,"\t").replace(/\n {8}/mg,"\n\t"); }); 
+  add(["make","Makefile"], function(code) { return code.replace(/^ {8}/g,"\t").replace(/\n {8}/mg,"\n\t"); });
 ```
 
 Standard Footer
@@ -351,7 +355,12 @@ $(LIBRARY).js: voc.md
         ./voc.njs $^ > $@2
         mkdir -p old/
         cp $@ old/$@
-        mv $@2 $@ 
+        mv $@2 $@
+
+.PHONY: lint
+lint:
+        @eslint --ext .js,.njs,.json voc.js voc.njs package.json
+        @jshint --show-non-errors voc.js voc.njs package.json
 ```
 
 Those files should be ignored by both git and npm:
