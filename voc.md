@@ -6,7 +6,7 @@ some love too!  This is my effort to rectify this inequity.
 
 ```json>package.json
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
 ```
 
 ## How to use this
